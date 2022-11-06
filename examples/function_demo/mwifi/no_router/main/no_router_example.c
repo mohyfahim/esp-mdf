@@ -239,7 +239,11 @@ static mdf_err_t wifi_init() {
   MDF_ERROR_ASSERT(esp_wifi_set_ps(WIFI_PS_NONE));
   MDF_ERROR_ASSERT(esp_mesh_set_6m_rate(false));
   MDF_ERROR_ASSERT(esp_wifi_start());
+  ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(80));
 
+  int8_t test_power = 0;
+  esp_wifi_get_max_tx_power(&test_power);
+  MDF_LOGI("max power %d", test_power);
   return MDF_OK;
 }
 
